@@ -1,11 +1,15 @@
-$monospace-font: Menlo, Monaco, Consolas, 'Courier New', monospace;
-$line-space: 18px;
-$baseTxtColor: #FFCC44;
-$titleColor: #008855;
-$strongColor: #BBE6D6;
-$codeColor: #F5D0D1;
-$codeBgColor: #EAEDE5;
-$aColor: #CCD3AF;
+$monospace-font: Menlo,Monaco, Consolas, 'Courier New', monospace;
+$line-space: 16px;
+$baseTxtColor: #CC3333;
+$titleColor: #CC3333;
+$strongColor: #FF6600;
+$codeColor: #008855;
+$codeBgColor: #FAFADD;
+$blockquoteColor: #951010;
+$blockquoteBgColor: #FFEEDD;
+$a0Color: #008855;
+$aColor: $strongColor;
+$lineColor: #bedcff;
 
 @mixin headTitle($padb: 4px, $fontSize: 24px, $mtop: 36px) {
   padding-bottom: $padb;
@@ -17,9 +21,9 @@ $aColor: #CCD3AF;
 }
 
 @mixin blockquoteColor {
-  color: #8c8c8c;
+  color: $blockquoteColor;
   border-left: 4px solid $strongColor;
-  background-color: #f0fdff;
+  background-color: $blockquoteBgColor;
 }
 
 .markdown-body {
@@ -29,6 +33,30 @@ $aColor: #CCD3AF;
   font-size: 14px;
   overflow-x: hidden;
   color: $baseTxtColor;
+
+  &::before {
+    content: '明天周六可以把我们一起出去玩改成我们去约会吗?';
+    font-size: 1.4em;
+    font-weight: bold;
+    color: $strongColor;
+    width: 100%;
+    display: block;
+    text-align: center;
+    border-bottom: 2px dashed $strongColor;
+    letter-spacing: 6px
+  }
+
+  &::after {
+    content: '相信美好的事情即将发生!';
+    font-size: 1.4em;
+    font-weight: bold;
+    color: $strongColor;
+    width: 100%;
+    display: block;
+    text-align: center;
+    border-top: 2px dashed $strongColor;
+    letter-spacing: 16px
+  }
 
   h1 {
     @include headTitle(4px, 30px);
@@ -42,7 +70,7 @@ $aColor: #CCD3AF;
     border-bottom: 1px solid #ececec;
 
     &::before {
-      content: '(っ•̀ω•́)っ「';
+      content: '「';
       position: absolute;
       top: -6px;
       left: -10px;
@@ -62,7 +90,7 @@ $aColor: #CCD3AF;
     padding-left: 6px;
 
     &::before {
-      content: '(｀・ω・´)»';
+      content: '※';
       padding-right: 6px;
       color: $strongColor;
     }
@@ -155,7 +183,7 @@ $aColor: #CCD3AF;
       }
 
       &::-webkit-scrollbar-track {
-        background-color: #bedcff;
+        background-color: $lineColor;
       }
 
       &::-webkit-scrollbar-thumb {
@@ -168,8 +196,9 @@ $aColor: #CCD3AF;
   a {
     position: relative;
     text-decoration: none;
-    color: #3da8f5;
-    border-bottom: 1px solid #bedcff;
+    color: $a0Color;
+    border-bottom: 1px solid $lineColor;
+    background: $codeBgColor;
 
     &:hover {
       color: $aColor;
@@ -187,7 +216,7 @@ $aColor: #CCD3AF;
       left: 0;
       width: 100%;
       opacity: 0;
-      border-bottom: 1px solid #bedcff;
+      border-bottom: 1px solid $lineColor;
       transition: top .3s, opacity .3s;
       transform: translate3d(0, 0, 0);
     }
@@ -205,7 +234,6 @@ $aColor: #CCD3AF;
     width: auto;
     max-width: 100%;
     overflow: auto;
-    border: 1px solid #c3e0fd;
     border-spacing: 0;
     border-collapse: collapse;
 
@@ -213,27 +241,27 @@ $aColor: #CCD3AF;
       color: #000;
       text-align: left;
       font-size: 14px;
-      background: #f6f6f6;
+      background: #FBFBFB;
     }
 
     tr:nth-child(2n) {
-      background-color: #f7fbff;
+      background-color: #FEF8F8;
     }
 
     tr:hover {
-      background-color: #e0edf7;
+      background-color: #FDFCE4;
     }
 
     th,
     td {
       padding: 12px 8px;
       line-height: 24px;
-      border: 1px solid #c3e0fd;
+      border: 1px solid #FFDDBB;
     }
 
     th {
       color: $titleColor;
-      background-color: #dff0ff;
+      background-color: $blockquoteBgColor;
     }
 
     td {
@@ -268,7 +296,7 @@ $aColor: #CCD3AF;
 
   i,
   em {
-    color: #4fc3f7;
+    color: $a0Color;
   }
 
   del {
@@ -305,9 +333,22 @@ $aColor: #CCD3AF;
 
   // details & summary
   details {
-    &>summary {}
+    &>summary {
+      outline: none;
+      color: $titleColor;
+      font-size: 20px;
+      font-weight: bolder;
+      border-bottom: 1px solid $lineColor;
+      cursor: pointer;
+    }
 
-    &>p {}
+    &>p {
+      padding: 10px 20px;
+      margin: 10px 0 0;
+      color: $blockquoteColor;
+      background-color: $blockquoteBgColor;
+      border: 2px dashed $strongColor;
+    }
   }
 
   // selection
@@ -348,6 +389,48 @@ $aColor: #CCD3AF;
   ul {
     ::selection {
       background-color: rgba(160, 200, 255, .15);
+    }
+  }
+
+  .contains-task-list {
+    padding-left: 14px;
+    list-style: none;
+
+    input[type="checkbox"] {
+      position: relative;
+
+      &::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        width: inherit;
+        height: inherit;
+        background: $blockquoteBgColor;
+        border: 1px solid $titleColor;
+        border-radius: 2px;
+        box-sizing: border-box;
+        z-index: 1;
+      }
+
+      &:checked {
+        &::after {
+          content: "\2713";
+          position: absolute;
+          top: -12px;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          width: 0;
+          height: 0;
+          color: #ff5555;
+          font-size: 20px;
+          font-weight: bold;
+          z-index: 2;
+        }
+      }
     }
   }
 
