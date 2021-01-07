@@ -1,4 +1,9 @@
-$monospace-font: Menlo,Monaco, Consolas, 'Courier New', monospace;
+@charset "UTF-8";
+$monospace-font: Menlo,
+Monaco,
+Consolas,
+'Courier New',
+monospace;
 $line-space: 16px;
 $baseTxtColor: #CC3333;
 $titleColor: #CC3333;
@@ -167,7 +172,7 @@ $lineColor: #bedcff;
     position: relative;
     line-height: 1.75;
 
-    >code {
+    > code {
       display: block;
       padding: 16px 12px;
       margin: 0;
@@ -279,12 +284,12 @@ $lineColor: #bedcff;
       content: '';
     }
 
-    &>p {
+    & > p {
       margin: 10px 0;
     }
 
-    &>b,
-    &>strong {
+    & > b,
+    & > strong {
       color: $strongColor;
     }
   }
@@ -333,7 +338,7 @@ $lineColor: #bedcff;
 
   // details & summary
   details {
-    &>summary {
+    & > summary {
       outline: none;
       color: $titleColor;
       font-size: 20px;
@@ -342,7 +347,7 @@ $lineColor: #bedcff;
       cursor: pointer;
     }
 
-    &>p {
+    & > p {
       padding: 10px 20px;
       margin: 10px 0 0;
       color: $blockquoteColor;
@@ -380,7 +385,7 @@ $lineColor: #bedcff;
   }
 
   pre {
-    >code::selection {
+    > code::selection {
       background-color: rgba(160, 200, 255, .25);
     }
   }
